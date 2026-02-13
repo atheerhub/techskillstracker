@@ -1,42 +1,59 @@
 import React from "react";
+import { Button, Nav } from "react-bootstrap";
 
 const Sidebar = ({ view, setView, darkMode, setDarkMode, onLogout }) => {
   return (
-    <aside className={`w-64 p-6 border-r ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-black'}`}>
-      <h2 className="text-xl font-bold mb-6">Tech Skill Tracker</h2>
-      <nav className="flex flex-col gap-2">
-        <button 
-          onClick={() => setView("stats")} 
-          className={`p-2 rounded font-bold ${view==='stats' ? 'bg-blue-600 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+    <aside 
+      className={`d-flex flex-column p-4 border-end ${darkMode ? 'bg-dark text-white border-secondary' : 'bg-white text-dark border-light'}`}
+      style={{ width: "260px", minHeight: "100vh" }}
+    >
+      <h4 className="fw-bold mb-4 text-uppercase border-bottom pb-3">
+        <i className="bi bi-cpu-fill me-2 text-primary"></i>Tracker
+      </h4>
+      
+      <Nav className="flex-column gap-2 flex-grow-1">
+        <Button 
+          variant={view === 'stats' ? 'primary' : 'link'} 
+          className={`text-start text-decoration-none p-2 rounded-3 ${view !== 'stats' && (darkMode ? 'text-white' : 'text-dark')}`}
+          onClick={() => setView("stats")}
         >
-          Stats
-        </button>
-        <button 
-          onClick={() => setView("list")} 
-          className={`p-2 rounded font-bold ${view==='list' ? 'bg-blue-600 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+          <i className="bi bi-speedometer2 me-2"></i> Stats
+        </Button>
+        
+        <Button 
+          variant={view === 'list' ? 'primary' : 'link'} 
+          className={`text-start text-decoration-none p-2 rounded-3 ${view !== 'list' && (darkMode ? 'text-white' : 'text-dark')}`}
+          onClick={() => setView("list")}
         >
-          Experiments
-        </button>
-        <button 
-          onClick={() => setView("profile")} 
-          className={`p-2 rounded font-bold ${view==='profile' ? 'bg-blue-600 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+          <i className="bi bi-journal-code me-2"></i> Experiments
+        </Button>
+        
+        <Button 
+          variant={view === 'profile' ? 'primary' : 'link'} 
+          className={`text-start text-decoration-none p-2 rounded-3 ${view !== 'profile' && (darkMode ? 'text-white' : 'text-dark')}`}
+          onClick={() => setView("profile")}
         >
-          Profile
-        </button>
-      </nav>
-      <div className="mt-6 space-y-2">
-        <button 
-          onClick={() => setDarkMode(!darkMode)} 
-          className="w-full p-2 rounded border"
+          <i className="bi bi-person-circle me-2"></i> Profile
+        </Button>
+      </Nav>
+
+      <div className="mt-auto pt-4 border-top">
+        <Button 
+          variant={darkMode ? "outline-light" : "outline-dark"} 
+          className="w-100 mb-2 rounded-3 shadow-none"
+          onClick={() => setDarkMode(!darkMode)}
         >
+          <i className={`bi bi-${darkMode ? 'sun-fill' : 'moon-stars-fill'} me-2`}></i>
           {darkMode ? "Light Mode" : "Dark Mode"}
-        </button>
-        <button 
-          onClick={onLogout} 
-          className="w-full p-2 rounded border text-red-500"
+        </Button>
+        
+        <Button 
+          variant="outline-danger" 
+          className="w-100 rounded-3 shadow-none fw-bold"
+          onClick={onLogout}
         >
-          Logout
-        </button>
+          <i className="bi bi-box-arrow-left me-2"></i> Logout
+        </Button>
       </div>
     </aside>
   );

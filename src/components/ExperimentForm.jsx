@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
 
-const ExperimentForm = ({ onSave, initialData }) => {
+const ExperimentForm = ({ onSave, initialData, darkMode }) => {
   const [title, setTitle] = useState(initialData?.title || "");
   const [problem, setProblem] = useState(initialData?.problem || "");
   const [solution, setSolution] = useState(initialData?.solution || "");
@@ -20,7 +21,6 @@ const ExperimentForm = ({ onSave, initialData }) => {
     if (!title || !problem || !solution) return alert("All fields are required");
     onSave({ title, problem, solution, category });
     
-    // إعادة تعيين الحقول فقط في حالة الإضافة الجديدة (وليس التعديل)
     if (!initialData) {
       setTitle("");
       setProblem("");
@@ -30,67 +30,80 @@ const ExperimentForm = ({ onSave, initialData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-3 border rounded shadow-sm bg-white dark:bg-gray-800">
-      <div className="d-flex flex-column gap-3">
+    <Form onSubmit={handleSubmit} className={`p-4 border rounded shadow-sm ${darkMode ? 'bg-dark text-white border-secondary' : 'bg-white'}`}>
+      <Row className="g-3">
         
-        {/* حقل العنوان */}
-        <div className="flex-1">
-          <label className="form-label fw-bold small mb-1">Skills Title</label>
-          <input
-            type="text"
-            placeholder="Enter title..."
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            className="form-control p-2 w-full shadow-sm"
-          />
-        </div>
+        <Col md={12}>
+          <Form.Group>
+            <Form.Label className="fw-bold small">Skills Title</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter title..."
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              className="shadow-sm"
+            />
+          </Form.Group>
+        </Col>
 
-        {/* مربع المشكلة */}
-        <div className="flex-1">
-          <label className="form-label fw-bold small mb-1">Problem Description</label>
-          <textarea
-            placeholder="What went wrong?"
-            value={problem}
-            onChange={e => setProblem(e.target.value)}
-            className="form-control p-2 w-full h-24 resize-none shadow-sm"
-          />
-        </div>
+        <Col md={12}>
+          <Form.Group>
+            <Form.Label className="fw-bold small">Problem Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="What went wrong?"
+              value={problem}
+              onChange={e => setProblem(e.target.value)}
+              className="shadow-sm"
+              style={{ resize: 'none' }}
+            />
+          </Form.Group>
+        </Col>
 
-        {/* مربع الحل */}
-        <div className="flex-1">
-          <label className="form-label fw-bold small mb-1">Solution</label>
-          <textarea
-            placeholder="How did you fix it?"
-            value={solution}
-            onChange={e => setSolution(e.target.value)}
-            className="form-control p-2 w-full h-24 resize-none shadow-sm"
-          />
-        </div>
+        <Col md={12}>
+          <Form.Group>
+            <Form.Label className="fw-bold small">Solution</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="How did you fix it?"
+              value={solution}
+              onChange={e => setSolution(e.target.value)}
+              className="shadow-sm"
+              style={{ resize: 'none' }}
+            />
+          </Form.Group>
+        </Col>
 
-        {/* تصنيف الخبرة */}
-        <div className="flex-1">
-          <label className="form-label fw-bold small mb-1">Category</label>
-          <select
-            value={category}
-            onChange={e => setCategory(e.target.value)}
-            className="form-select p-2 w-full shadow-sm cursor-pointer"
+        <Col md={12}>
+          <Form.Group>
+            <Form.Label className="fw-bold small">Category</Form.Label>
+            <Form.Select
+              value={category}
+              onChange={e => setCategory(e.target.value)}
+              className="shadow-sm"
+            >
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
+              <option value="Database">Database</option>
+              <option value="Security">Cybersecurity</option>
+            </Form.Select>
+          </Form.Group>
+        </Col>
+
+        <Col md={12}>
+          <Button 
+            variant="success" 
+            type="submit" 
+            className="w-100 py-2 mt-2 fw-bold shadow"
           >
-            <option value="Frontend">Frontend</option>
-            <option value="Backend">Backend</option>
-            <option value="Database">Database</option>
-            <option value="Security">Cybersecurity</option>
-          </select>
-        </div>
-
-        {/* زر الحفظ - عرض كامل متناسق */}
-        <button 
-          type="submit" 
-          className="btn btn-success py-2 mt-2 fw-bold w-full shadow"
-        >
-          {initialData ? "Update Changes" : "Save "}
-        </button>
-      </div>
-    </form>
+            <i className={`bi bi-${initialData ? 'check-all' : 'plus-circle'} me-2`}></i>
+            {initialData ? "Update Changes" : "Save "}
+          </Button>
+        </Col>
+      </Row>
+    </Form>
   );
 };
 

@@ -1,44 +1,57 @@
 import React from "react";
+import { Table as BootstrapTable, Button } from "react-bootstrap";
 
 const Table = ({ data, onEdit, onDelete }) => {
   return (
-    <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-600">
-      <thead>
-        <tr className="bg-gray-200 dark:bg-gray-700">
-          <th className="border p-2">Title</th>
-          <th className="border p-2">Problem</th>
-          <th className="border p-2">Solution</th> {/* تم إضافة Solution */}
-          <th className="border p-2">Category</th>
-          <th className="border p-2">Date</th>
-          <th className="border p-2">Actions</th>
+    <BootstrapTable responsive bordered hover variant="light" className="align-middle shadow-sm">
+      <thead className="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Problem</th>
+          <th>Solution</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th className="text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
-        {data.map((exp) => (
-          <tr key={exp.id} className="hover:bg-gray-100 dark:hover:bg-gray-800">
-            <td className="border p-2">{exp.title}</td>
-            <td className="border p-2">{exp.problem}</td>
-            <td className="border p-2">{exp.solution}</td> {/* تم إضافة Solution */}
-            <td className="border p-2">{exp.category}</td>
-            <td className="border p-2">{exp.date}</td>
-            <td className="border p-2 flex gap-2">
-              <button
-                onClick={() => onEdit(exp)}
-                className="px-2 py-1 bg-yellow-500 text-white rounded"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => onDelete(exp.id)}
-                className="px-2 py-1 bg-red-600 text-white rounded"
-              >
-                Delete
-              </button>
-            </td>
+        {data.length > 0 ? (
+          data.map((exp) => (
+            <tr key={exp.id}>
+              <td className="fw-bold">{exp.title}</td>
+              <td>{exp.problem}</td>
+              <td>{exp.solution}</td>
+              <td>
+                <span className="badge bg-primary rounded-pill">{exp.category}</span>
+              </td>
+              <td>{exp.date}</td>
+              <td>
+                <div className="d-flex gap-2 justify-content-center">
+                  <Button 
+                    variant="outline-warning" 
+                    size="sm" 
+                    onClick={() => onEdit(exp)}
+                  >
+                    <i className="bi bi-pencil"></i> Edit
+                  </Button>
+                  <Button 
+                    variant="outline-danger" 
+                    size="sm" 
+                    onClick={() => onDelete(exp.id)}
+                  >
+                    <i className="bi bi-trash"></i> Delete
+                  </Button>
+                </div>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="6" className="text-center py-4 text-muted">No skill logs found.</td>
           </tr>
-        ))}
+        )}
       </tbody>
-    </table>
+    </BootstrapTable>
   );
 };
 

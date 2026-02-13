@@ -31,8 +31,10 @@ const Dashboard = ({ currentUser, onLogout }) => {
     const saved = localStorage.getItem("my_skills");
     let data = saved ? JSON.parse(saved) : initialExperiments;
     
+    // تأكد من أن كل مهارة لديها تاريخ (إذا لم يوجد نضع تاريخ اليوم)
     const sanitizedData = data.map(item => ({
       ...item,
+      date: item.date || new Date().toLocaleDateString('en-GB'),
       category: item.category === "Security" ? "Cybersecurity" : item.category
     }));
     
@@ -48,8 +50,11 @@ const Dashboard = ({ currentUser, onLogout }) => {
     });
   }, [skills, searchQuery, filterCategory]);
 
+  //   Last Update بناءً على أحدث تاريخ في السجلات ---
   const stats = useMemo(() => {
-    const lastDate = skills.length > 0 ? skills[0].date : "No Data";
+    const dates = skills.map(s => s.date).filter(Boolean);
+    const lastDate = dates.length > 0 ? dates[0] : new Date().toLocaleDateString('en-GB');
+    
     return {
       TotalSolved: skills.length,
       TechFields: new Set(skills.map(s => s.category)).size,
@@ -71,10 +76,12 @@ const Dashboard = ({ currentUser, onLogout }) => {
     }]
   }), [skills]);
 
+  // إضافة التاريخ عند الحفظ ليظهر في التحديثات 
   const handleSave = (data) => {
+    const currentDate = new Date().toLocaleDateString('en-GB');
     let updated = editingSkill 
-      ? skills.map(s => s.id === editingSkill.id ? {...data, id: s.id, date: s.date} : s)
-      : [{...data, id: Date.now(), date: new Date().toLocaleDateString()}, ...skills];
+      ? skills.map(s => s.id === editingSkill.id ? {...data, id: s.id, date: currentDate} : s)
+      : [{...data, id: Date.now(), date: currentDate}, ...skills];
     
     setSkills(updated);
     localStorage.setItem("my_skills", JSON.stringify(updated));
@@ -183,7 +190,6 @@ const Dashboard = ({ currentUser, onLogout }) => {
                   {filteredSkills.map(skill => (
                     <tr key={skill.id} className="align-middle">
                       <td className="fw-bold">{skill.title}</td>
-                      {/* --- التعديل هنا: توحيد عرض الدائرة وتوسيطها --- */}
                       <td>
                         <span 
                           className={`badge rounded-pill px-3 ${darkMode ? "bg-dark text-info border border-info" : "bg-light text-primary border"}`}

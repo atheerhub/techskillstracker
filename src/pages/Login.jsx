@@ -58,7 +58,7 @@ const Login = ({ onLogin }) => {
                   <p className="text-muted small">Log in to track your skills</p>
                 </div>
 
-                {/* عرض تنبيه الخطأ بشكل أنيق */}
+                {/* عرض تنبيه رسالة الخطأ  */}
                 {error && <Alert variant="danger" className="py-2 small text-center border-0 rounded-3">{error}</Alert>}
 
                 <Form onSubmit={handleSubmit}>

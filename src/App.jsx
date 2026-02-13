@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import { initialExperiments } from "./data/experimentsData"; 
 
 function App() {
   const [user, setUser] = useState(null);
@@ -10,7 +11,15 @@ function App() {
 
   return (
     <div>
-      {!user ? <Login onLogin={handleLogin} /> : <Dashboard currentUser={user} onLogout={handleLogout} />}
+      {!user ? (
+        <Login onLogin={handleLogin} />
+      ) : (
+        <Dashboard 
+          currentUser={user} 
+          onLogout={handleLogout} 
+          experiments={initialExperiments} 
+        />
+      )}
     </div>
   );
 }
