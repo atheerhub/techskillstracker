@@ -1,16 +1,42 @@
-# React + Vite
+# Skills Tracking Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Skills Tracking Platform is a personal frontend project created to practice building user interfaces with React.
 
-Currently, two official plugins are available:
+The project provides a simple interface for organizing and displaying skill-related information using reusable React components.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## React Compiler
+- React
+- JavaScript (JSX)
+- HTML
+- CSS
+- Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
+The project is organized into reusable components and pages, including interface elements such as:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Profile
+- Header and Sidebar
+- Statistics Cards
+- Tables
+- Forms
+
+## Project Purpose
+
+This project was created to practice:
+
+- React component-based development
+- Building reusable UI components
+- Organizing frontend project structure
+- Working with JSX and CSS
+- Building a frontend project using Vite
+
+## Project Type
+
+Personal Frontend Web Development Project
+
+## Author
+
+Atheer Khalaf  
+Software Engineering Graduate
