@@ -1,4 +1,4 @@
-# Skills Tracking Platform
+# Tech Skills Tracker Platform
 
 Skills Tracking Platform is a personal frontend project created to practice building user interfaces with React.
 
