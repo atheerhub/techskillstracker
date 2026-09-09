@@ -9,10 +9,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // استيراد ملفات CSS الخاصة بالمشروع
 import './index.css';
 
-// تحديد العنصر اللي هنعمل له render
+// تحديد العنصر الذي سوف نقوم بعمل render له
 const rootElement = document.getElementById('root');
 
-// إنشاء الـ root مع React 18
+
 const root = ReactDOM.createRoot(rootElement);
 
 // Render للتطبيق
